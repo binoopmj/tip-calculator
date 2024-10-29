@@ -1,0 +1,85 @@
+<div class="bg-[#c5e4e7] h-dvh">
+  <h1 class="my-24 inline-block text-center w-full text-[#476c6e] tracking-widest font-semibold">SPLI<br>TTER</h1>
+  <div class="tip-calculator bg-white rounded-xl p-8 w-4/5 m-auto">
+    <form [formGroup]="tipForm" (ngSubmit)="calculateTip()">
+      <div class="flex">
+        <div class="w-1/2">
+          <div class="mb-4">
+            <label class="mb-2 block" for="total"> Bill</label>
+            <input class="w-full bg-[#f3f8fb] p-2 rounded" id="total" type="number" formControlName="total"
+              placeholder="$" />
+              <div *ngIf="tipForm.get('total')?.invalid && tipForm.get('total')?.touched">
+                <small *ngIf="tipForm.get('total')?.errors?.['required']">Total is required.</small>
+                <small *ngIf="tipForm.get('total')?.errors?.['min']">Total must be greater than 0.</small>
+              </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="mb-2 block" for="tipPercentage">Select Tip %</label>
+            <div class="grid grid-cols-3 grid-flow-row gap-3">
+              <div>
+                <button type="button" class="w-full border bg-[#00474b] text-white p-2 rounded" (click)="setPercentTip(5)">5%</button>
+              </div>
+              <div>
+                <button type="button" class="w-full border bg-[#00474b] text-white p-2 rounded" (click)="setPercentTip(10)">10%</button>
+              </div>
+              <div>
+                <button type="button" class="w-full border bg-[#00474b] text-white p-2 rounded" (click)="setPercentTip(15)">15%</button>
+              </div>
+              <div>
+                <button type="button" class="w-full border bg-[#00474b] text-white p-2 rounded" (click)="setPercentTip(25)">25%</button>
+              </div>
+              <div>
+                <button type="button" class="w-full border bg-[#00474b] text-white p-2 rounded" (click)="setPercentTip(50)">50%</button>
+              </div>
+              <div>
+                <input class="bg-[#f3f8fb] p-2 rounded" id="tipPercentage" type="number" formControlName="tipPercentage" placeholder="Custom" />
+              </div>
+            </div>
+            <div *ngIf="tipForm.get('tipPercentage')?.invalid && tipForm.get('tipPercentage')?.touched">
+              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['required']">Tip percentage is required.</small>
+              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['min']">Tip percentage cannot be negative.</small>
+              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['max']">Tip percentage cannot exceed 100.</small>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="mb-2 block" for="people">Number of People</label>
+            <input class="w-full bg-[#f3f8fb] p-2 rounded" id="people" type="number" formControlName="people" placeholder="" />
+            <div *ngIf="tipForm.get('people')?.invalid && tipForm.get('people')?.touched">
+              <small *ngIf="tipForm.get('people')?.errors?.['required']">Number of people is required.</small>
+              <small *ngIf="tipForm.get('people')?.errors?.['min']">There must be at least 1 person.</small>
+            </div>
+          </div>
+
+          <button class="bg-[#00474b] text-white disabled:opacity-75 py-2 px-4 rounded" type="submit" [disabled]="tipForm.invalid">Calculate Tip</button>
+
+        </div>
+        <div class="w-1/2 bg-[#00474b] m-4 p-4 text-white rounded-xl">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div>Tip Amount<br><small class="text-[#6e9da1]">/ person</small></div> 
+              @if (tipPerPerson !== null){
+                <div class="text-[#25c5ac] text-xl">${{ tipPerPerson.toFixed(2) }}</div>
+              }
+            </div>
+            <div class="flex justify-between items-start mb-4">
+              <div>Total<br><small class="text-[#6e9da1]">/ person</small></div> 
+              @if (totalPerPerson) {
+                <div class="text-[#25c5ac] text-xl">${{ totalPerPerson.toFixed(2) }}</div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+
+  <!-- <div style="text-align:center">
+    <h1>Tip Counter</h1>
+    <h2>{{ counter() }}</h2>
+    <button (click)="decrement()">-</button>
+    <button (click)="increment()">+</button>
+  </div> -->
+</div>
