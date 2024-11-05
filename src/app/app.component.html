@@ -8,9 +8,9 @@
             <label class="mb-2 block" for="total"> Bill</label>
             <input class="w-full bg-[#f3f8fb] p-2 rounded" id="total" type="number" formControlName="total"
               placeholder="$" />
-              <div *ngIf="tipForm.get('total')?.invalid && tipForm.get('total')?.touched">
-                <small *ngIf="tipForm.get('total')?.errors?.['required']">Total is required.</small>
-                <small *ngIf="tipForm.get('total')?.errors?.['min']">Total must be greater than 0.</small>
+              <div *ngIf="tipForm.get('total')?.invalid && (tipForm.get('total')?.touched || tipForm.get('total')?.dirty)">
+                <small class="text-[#fd3f1e]" *ngIf="tipForm.get('total')?.errors?.['required']">Bill amount is required.</small>
+                <small class="text-[#fd3f1e]" *ngIf="tipForm.get('total')?.errors?.['min']">Bill amount must be greater than 0.</small>
               </div>
           </div>
 
@@ -36,22 +36,21 @@
                 <input class="bg-[#f3f8fb] p-2 rounded" id="tipPercentage" type="number" formControlName="tipPercentage" placeholder="Custom" />
               </div>
             </div>
-            <div *ngIf="tipForm.get('tipPercentage')?.invalid && tipForm.get('tipPercentage')?.touched">
-              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['required']">Tip percentage is required.</small>
-              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['min']">Tip percentage cannot be negative.</small>
-              <small *ngIf="tipForm.get('tipPercentage')?.errors?.['max']">Tip percentage cannot exceed 100.</small>
+            <div *ngIf="tipForm.get('tipPercentage')?.invalid && (tipForm.get('tipPercentage')?.touched || tipForm.get('tipPercentage')?.dirty)">
+              <small class="text-[#fd3f1e]" *ngIf="tipForm.get('tipPercentage')?.errors?.['required']">Tip percentage is required.</small>
+              <small class="text-[#fd3f1e]" *ngIf="tipForm.get('tipPercentage')?.errors?.['min']">Tip percentage cannot be negative.</small>
+              <small class="text-[#fd3f1e]" *ngIf="tipForm.get('tipPercentage')?.errors?.['max']">Tip percentage cannot exceed 100.</small>
             </div>
           </div>
-          <div class="mb-4">
+          <div class="mb-4 relative">
             <label class="mb-2 block" for="people">Number of People</label>
+            <div class=""><img class="w-4 h-4" src="assets/images/user.svg" alt=""></div>
             <input class="w-full bg-[#f3f8fb] p-2 rounded" id="people" type="number" formControlName="people" placeholder="" />
-            <div *ngIf="tipForm.get('people')?.invalid && tipForm.get('people')?.touched">
-              <small *ngIf="tipForm.get('people')?.errors?.['required']">Number of people is required.</small>
-              <small *ngIf="tipForm.get('people')?.errors?.['min']">There must be at least 1 person.</small>
+            <div *ngIf="tipForm.get('people')?.invalid && (tipForm.get('people')?.touched || tipForm.get('people')?.dirty)">
+              <small class="text-[#fd3f1e]" *ngIf="tipForm.get('people')?.errors?.['required']">Number of people is required.</small>
+              <small class="text-[#fd3f1e]" *ngIf="tipForm.get('people')?.errors?.['min']">There must be at least 1 person.</small>
             </div>
           </div>
-
-          <button class="bg-[#00474b] text-white disabled:opacity-75 py-2 px-4 rounded" type="submit" [disabled]="tipForm.invalid">Calculate Tip</button>
 
         </div>
         <div class="w-1/2 bg-[#00474b] m-4 p-4 text-white rounded-xl">

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "docs/tip-calculator/",
+            "outputPath": "dist/tip-calculator/",
             "baseHref": "/tip-calculator/",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -27,6 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -35,6 +36,7 @@
             "styles": [
               "src/styles.scss"
             ],
+
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,

@@ -17,8 +17,14 @@ export class AppComponent {
   constructor(private fb: FormBuilder) {
     this.tipForm = this.fb.group({
       total: ['', [Validators.required, Validators.min(0.01)]],
-      tipPercentage: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
-      people: ['', [Validators.required, Validators.min(1)]]
+      tipPercentage: ['0', [Validators.required, Validators.min(0), Validators.max(100)]],
+      people: ['1', [Validators.required, Validators.min(1)]]
+    });
+  }
+
+  ngOnInit() {
+    this.tipForm.valueChanges.subscribe(() => {
+      this.calculateTip();
     });
   }
 
